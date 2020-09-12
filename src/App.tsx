@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import SignUp from './components/signup/signup'
+import Form from './components/signup/signup'
 
 
 function App() {
   return (
     <div>
-      <SignUp />
+      <Form />
     </div>
   );
 }
