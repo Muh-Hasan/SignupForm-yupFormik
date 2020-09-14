@@ -26,12 +26,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: "darkBlue",
   },
 }));
 
@@ -47,15 +46,20 @@ function Form() {
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
-        .max(15, "Must be 15 characters or less")
-        .required("Required"),
+        .max(20, "Must be 20 characters or less")
+        .required("This field is required"),
       lastName: Yup.string()
         .max(20, "Must be 20 characters or less")
-        .required("Required"),
-      email: Yup.string().email("Invalid email address").required("Required"),
+        .required("This field is required"),
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("This field is required"),
       password: Yup.string()
-        .min(5, "Password is too short - should be 8 chars minimum.")
-        .required("Required"),
+        .required("This field is required")
+        .matches(
+          /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+          "Must contain at least 8 characters, one uppercase, one lowercase, one number and a special character"
+        )
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
@@ -67,7 +71,7 @@ function Form() {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Sign up
+          SIGN UP
         </Typography>
 
         <form onSubmit={formik.handleSubmit} className={classes.form}>
